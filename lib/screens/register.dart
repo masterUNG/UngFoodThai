@@ -8,6 +8,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   // Explicit
   final formKey = GlobalKey<FormState>();
+  String name, user, password;
 
   // Method
   Widget nameText() {
@@ -26,8 +27,13 @@ class _RegisterState extends State<Register> {
           color: Colors.green[200],
           fontStyle: FontStyle.italic,
         ),
-      ),validator: (String value){
-        
+      ),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Please Fill Name in Blank';
+        }
+      },onSaved: (String value){
+        name = value;
       },
     );
   }
@@ -36,18 +42,26 @@ class _RegisterState extends State<Register> {
     return TextFormField(
       style: TextStyle(color: Colors.blue[900]),
       decoration: InputDecoration(
-          icon: Icon(
-            Icons.account_circle,
-            size: 36.0,
-            color: Colors.blue[700],
-          ),
-          labelText: 'User :',
-          labelStyle: TextStyle(color: Colors.blue[700]),
-          helperText: 'Type User Name',
-          helperStyle: TextStyle(
-            color: Colors.blue[200],
-            fontStyle: FontStyle.italic,
-          )),
+        icon: Icon(
+          Icons.account_circle,
+          size: 36.0,
+          color: Colors.blue[700],
+        ),
+        labelText: 'User :',
+        labelStyle: TextStyle(color: Colors.blue[700]),
+        helperText: 'Type User Name',
+        helperStyle: TextStyle(
+          color: Colors.blue[200],
+          fontStyle: FontStyle.italic,
+        ),
+      ),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'Please Fill User';
+        }
+      },onSaved: (String value){
+        user = value;
+      },
     );
   }
 
@@ -55,18 +69,25 @@ class _RegisterState extends State<Register> {
     return TextFormField(
       style: TextStyle(color: Colors.purple[900]),
       decoration: InputDecoration(
-          icon: Icon(
-            Icons.lock,
-            size: 36.0,
-            color: Colors.purple[700],
-          ),
-          labelText: 'Password :',
-          labelStyle: TextStyle(color: Colors.purple[700]),
-          helperText: 'Type Password',
-          helperStyle: TextStyle(
-            color: Colors.purple[200],
-            fontStyle: FontStyle.italic,
-          )),
+        icon: Icon(
+          Icons.lock,
+          size: 36.0,
+          color: Colors.purple[700],
+        ),
+        labelText: 'Password :',
+        labelStyle: TextStyle(color: Colors.purple[700]),
+        helperText: 'Type Password',
+        helperStyle: TextStyle(
+          color: Colors.purple[200],
+          fontStyle: FontStyle.italic,
+        ),
+      ),validator: (String value){
+        if (value.isEmpty) {
+          return 'Please Type Password';
+        }
+      },onSaved: (String value){
+        password = value;
+      },
     );
   }
 
@@ -78,6 +99,7 @@ class _RegisterState extends State<Register> {
 
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
+          print('name = $name, user = $user, password = $password');
         }
       },
     );
