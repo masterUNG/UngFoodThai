@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' show get;
+import 'dart:convert';
 
 class Register extends StatefulWidget {
   @override
@@ -32,7 +34,8 @@ class _RegisterState extends State<Register> {
         if (value.isEmpty) {
           return 'Please Fill Name in Blank';
         }
-      },onSaved: (String value){
+      },
+      onSaved: (String value) {
         name = value;
       },
     );
@@ -59,7 +62,8 @@ class _RegisterState extends State<Register> {
         if (value.isEmpty) {
           return 'Please Fill User';
         }
-      },onSaved: (String value){
+      },
+      onSaved: (String value) {
         user = value;
       },
     );
@@ -81,11 +85,13 @@ class _RegisterState extends State<Register> {
           color: Colors.purple[200],
           fontStyle: FontStyle.italic,
         ),
-      ),validator: (String value){
+      ),
+      validator: (String value) {
         if (value.isEmpty) {
           return 'Please Type Password';
         }
-      },onSaved: (String value){
+      },
+      onSaved: (String value) {
         password = value;
       },
     );
@@ -100,9 +106,21 @@ class _RegisterState extends State<Register> {
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
           print('name = $name, user = $user, password = $password');
+          registerToServer();
         }
       },
     );
+  }
+
+  Future<void> registerToServer() async {
+    String urlString =
+        'https://www.androidthai.in.th/ooo/addDataMaster.php?isAdd=true&Name=$name&User=$user&Password=$password';
+    var response = await get(urlString);
+    var result = json.decode(response.body);
+    print('result = $result');
+    if ((result.toString()) == 'true') {
+      Navigator.of(context).pop();
+    }
   }
 
   @override
