@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ung_foodthai/models/user_model.dart';
+import 'package:ung_foodthai/screens/my_service.dart';
 import 'package:ung_foodthai/screens/register.dart';
 import 'package:http/http.dart' show get;
 import 'dart:convert';
@@ -44,21 +45,19 @@ class _AuthenState extends State<Authen> {
       print('User True result = $result');
 
       for (var myParseJSON in result) {
-        
         UserModel userModel = UserModel.parseJSON(myParseJSON);
 
         String truePassword = userModel.Password;
         if (password == truePassword) {
           // Password True
+          var myServiceRoute =
+              MaterialPageRoute(builder: (BuildContext context) => MyService(userModel: userModel,));
+              Navigator.of(context).pushAndRemoveUntil(myServiceRoute, (Route<dynamic> route) => false);
         } else {
           // Password False
           myAlertDialog('Password False', 'Please Try Agains Password False');
         }
-
       }
-
-
-
     }
   }
 
@@ -67,7 +66,10 @@ class _AuthenState extends State<Authen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(titleString, style: TextStyle(color: Colors.red),),
+          title: Text(
+            titleString,
+            style: TextStyle(color: Colors.red),
+          ),
           content: Text(messageString),
           actions: <Widget>[alertButton()],
         );
@@ -77,7 +79,8 @@ class _AuthenState extends State<Authen> {
 
   Widget alertButton() {
     return FlatButton(
-      child: Text('OK'),onPressed: (){
+      child: Text('OK'),
+      onPressed: () {
         Navigator.of(context).pop();
       },
     );
