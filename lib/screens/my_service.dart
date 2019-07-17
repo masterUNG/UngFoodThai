@@ -118,15 +118,13 @@ class _MyServiceState extends State<MyService> {
   }
 
   Widget showText(int index) {
-    return Expanded(
-      child: Container(
-        alignment: Alignment.topLeft,
-        child: Column(
-          children: <Widget>[
-            showNameFood(index),
-            showDetailFood(index),
-          ],
-        ),
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          showNameFood(index),
+          showDetailFood(index),
+        ],
       ),
     );
   }
@@ -150,7 +148,7 @@ class _MyServiceState extends State<MyService> {
                 builder: (BuildContext context) => DetailFood(
                       foodModel: foodModels[index],
                     ));
-                    Navigator.of(context).push(detailRoute);
+            Navigator.of(context).push(detailRoute);
           },
         );
       },

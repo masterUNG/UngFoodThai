@@ -135,7 +135,7 @@ class _RegisterState extends State<Register> {
       ),
       body: Container(
         alignment: Alignment.topCenter,
-        padding: EdgeInsets.only(top: 60.0, left: 30.0, right: 30.0),
+        padding: EdgeInsets.only(top: 30.0, left: 30.0, right: 30.0),
         child: Form(
           key: formKey,
           child: ListView(

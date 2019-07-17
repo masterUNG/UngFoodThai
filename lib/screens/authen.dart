@@ -50,9 +50,12 @@ class _AuthenState extends State<Authen> {
         String truePassword = userModel.Password;
         if (password == truePassword) {
           // Password True
-          var myServiceRoute =
-              MaterialPageRoute(builder: (BuildContext context) => MyService(userModel: userModel,));
-              Navigator.of(context).pushAndRemoveUntil(myServiceRoute, (Route<dynamic> route) => false);
+          var myServiceRoute = MaterialPageRoute(
+              builder: (BuildContext context) => MyService(
+                    userModel: userModel,
+                  ));
+          Navigator.of(context).pushAndRemoveUntil(
+              myServiceRoute, (Route<dynamic> route) => false);
         } else {
           // Password False
           myAlertDialog('Password False', 'Please Try Agains Password False');
@@ -171,8 +174,8 @@ class _AuthenState extends State<Authen> {
 
   Widget showLogo() {
     return Container(
-      width: 160.0,
-      height: 160.0,
+      width: 120.0,
+      height: 120.0,
       child: Image.asset('images/logo.png'),
     );
   }
@@ -181,7 +184,7 @@ class _AuthenState extends State<Authen> {
     return Text(
       'Ung FoodThai',
       style: TextStyle(
-        fontSize: 48.0,
+        fontSize: 36.0,
         fontWeight: FontWeight.bold,
         color: Colors.pinkAccent[700],
         fontFamily: 'DancingScript',
@@ -192,29 +195,23 @@ class _AuthenState extends State<Authen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.purple[300], Colors.purple[50]],
-            begin: Alignment.topCenter,
-          ),
-        ),
-        padding: EdgeInsets.only(top: 60.0),
-        alignment: Alignment.topCenter,
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: <Widget>[
-              showLogo(),
-              mySizeBox(),
-              showAppName(),
-              userText(),
-              passwordText(),
-              mySizeBox(),
-              showButton(),
-            ],
-          ),
+      backgroundColor: Colors.purple[100],
+      body: Form(
+        key: formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              child: showLogo(),
+            ),
+            mySizeBox(),
+            showAppName(),
+            userText(),
+            passwordText(),
+            mySizeBox(),
+            showButton(),
+          ],
         ),
       ),
     );
